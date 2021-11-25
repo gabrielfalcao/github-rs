@@ -1,7 +1,9 @@
-use github_rs::Client;
+use github_rs_config::Config;
+use github_rs_client::Client;
 
-// /Users/gabrielfalcao/.config/github-rs/config.yml
 fn main() {
-    let client = Client::new("foobar");
+    let config = Config::load("/Users/gabrielfalcao/.config/github-rs/config.yml");
+    println!("Config {:?}", config);
+    let client = Client::new(config);
     println!("Client {:?}", client);
 }
