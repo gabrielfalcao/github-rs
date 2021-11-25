@@ -1,4 +1,5 @@
-use github_rs_config::Config;
+use crate::Config;
+
 use reqwest;
 use reqwest::header::{HeaderMap, HeaderValue};
 use serde_json::Value;
@@ -18,13 +19,13 @@ impl Client {
 
     fn wrap_request(&self, req: RequestBuilder) -> RequestBuilder {
         let mut headers = HeaderMap::new();
-        let token = self.config.github_token();
         headers.insert(
             "Accept",
             HeaderValue::from_static("application/vnd.github.v3+json"),
         );
         headers.insert("User-Agent", HeaderValue::from_static("github-rs"));
-        req.headers(headers).bearer_auth(token)
+        let token = self.config.github_token();
+        req.headers(headers).bearer_auth(token.as_str())
     }
     pub fn get_user(&self) -> Option<String> {
         match self

@@ -290,9 +290,11 @@ version = "0.1.0"
 dependencies = [
  "ansi_term",
  "clap",
- "github_rs_client",
- "github_rs_config",
  "k9",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "serde_yaml",
  "speculate",
  "syntect",
 ]
