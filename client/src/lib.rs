@@ -26,13 +26,17 @@ impl Client {
         headers.insert("User-Agent", HeaderValue::from_static("github-rs"));
         req.headers(headers).bearer_auth(token)
     }
-    pub fn get_user(&self) {
-        let response = self
+    pub fn get_user(&self) -> Option<String> {
+        match self
             .wrap_request(self.client.get("https://api.github.com/user"))
             .send()
-            .unwrap();
-        let data = response.text().unwrap();
-        let v: Value = serde_json::from_str(&data).unwrap();
-        println!("{}", serde_json::to_string_pretty(&v).unwrap());
+        {
+            Ok(response) => {
+                let data = response.text().unwrap();
+                let v: Value = serde_json::from_str(&data).unwrap();
+                Some(serde_json::to_string_pretty(&v).unwrap())
+            },
+            Err(e) => {eprintln!("Error making request: {}", e); None},
+        }
     }
 }

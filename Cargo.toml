@@ -8,6 +8,7 @@ github_rs_config = { path = './config' }
 github_rs_client = { path = './client' }
 ansi_term = "0.12"
 clap = "3.0.0-beta.5"
+syntect = "4.4"
 
 [dev-dependencies]
 speculate = "0.1"
