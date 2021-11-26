@@ -300,24 +300,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "github_rs_client"
-version = "0.1.0"
-dependencies = [
- "github_rs_config",
- "reqwest",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "github_rs_config"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_yaml",
-]
-
-[[package]]
 name = "h2"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"

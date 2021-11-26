@@ -2,6 +2,7 @@ mod client;
 mod config;
 use client::Client;
 use config::Config;
+use std::io::{self, Write};
 use syntect::easy::HighlightLines;
 use syntect::parsing::SyntaxSet;
 use syntect::highlighting::{ThemeSet, Style};
@@ -12,7 +13,6 @@ fn main() {
     let config = Config::load("/Users/gabrielfalcao/.config/github-rs/config.yml");
     let username = config.github_username();
     let client = Client::new(config);
-
 
     println!("Retrieving info about github user: {}", username);
     let data = client.get_user().unwrap();
@@ -27,6 +27,7 @@ fn main() {
     for line in LinesWithEndings::from(s) {
         let ranges: Vec<(Style, &str)> = h.highlight(line, &ps);
         let escaped = as_24_bit_terminal_escaped(&ranges[..], true);
-        println!("{}", escaped);
+        io::stdout().write_all(escaped.as_bytes()).unwrap();
     }
+    println!("\x1b[0m");
 }

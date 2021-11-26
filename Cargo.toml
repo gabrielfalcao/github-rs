@@ -17,10 +17,3 @@ serde_json = { version = "1.0.71", features = ["std", "preserve_order"] }
 [dev-dependencies]
 speculate = "0.1"
 k9 = "0.11.1"
-
-[workspace]
-
-members = [
-    "config",
-    "client",
-]
